@@ -1,30 +1,135 @@
-import React from "react";
-import { AiOutlineHeart } from "react-icons/ai";
-import { LuSettings } from "react-icons/lu";
-import { RiHome6Line } from "react-icons/ri";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+"use client";
+import React, { useState ,useEffect } from "react";
+import { FiBell } from "react-icons/fi";
+import FooterHomePage from "./FooterHomePage";
+import { BiFilter, BiSearch } from "react-icons/bi";
+import { LuSearch } from "react-icons/lu";
+import { BsFill1CircleFill } from "react-icons/bs";
+import ItemsCard from "./ItemsCard";
+import Loading from "./Loading";
+
+
 const HomePage = () => {
+    const [allProducts, setAllProducts] = useState([]);
+  const [active, setActive] = useState([1, 0, 0, 0]);
+  const [isLoading, setIsLoading] = useState(true);
+    async function fetchData(url) {
+      try {
+          setIsLoading(true);
+            let res = await fetch(url);
+            res = await res.json();
+            res = res.products;
+            console.log(res);
+        setAllProducts(res);
+        setIsLoading(false);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    
+
+    useEffect(() => {
+        fetchData("https://dummyjson.com/products");
+    }, [])
+
+
+    const handleClick = (e) => {
+        if (e.target.innerText === 'Women') {
+            fetchData("https://dummyjson.com/products/search?q=women");
+            let temp = [0, 0, 1, 0];
+            setActive(temp);
+
+        }
+        else if (e.target.innerText === 'Men') {
+            fetchData("https://dummyjson.com/products/category/mens-shirts");
+            let temp = [0, 1, 0, 0];
+            setActive(temp);
+        }
+        else if(e.target.innerText === 'All') {
+            fetchData("https://dummyjson.com/products");
+            let temp = [1, 0, 0, 0];
+            setActive(temp);
+        }
+        else {
+            fetchData("https://dummyjson.com/products/search?q=kids");
+            let temp = [0, 0, 0, 1];
+            setActive(temp);
+        }
+    }
+
   return (
-    <div className="relative min-h-screen">
-      HomePage
-      <div className="absolute bottom-0 p-4 bg-white w-full flex text-gray-600 justify-between text-2xl items-center border-t border-gray-400">
-        <div className="w-full flex flex-col justify-center p-2 items-center">
-          <RiHome6Line className="text-black" />
-          <span className="text-sm font-openSans text-gray-500">Home</span>
+    <div className="relative min-h-screen pt-8">
+      <div className="flex mx-4  p-4 pl-0 items-center relative">
+        <h1 className="grow text-4xl font-semibold font-sans">Discover</h1>
+        <FiBell className="text-2xl font-extrabold" />
+        <BsFill1CircleFill className="absolute top-5 right-4 rounded-full text-sm " />
+      </div>
+      <div className="flex mx-4   mt-2 items-center gap-2">
+        <div className="grow p-2 py-4 flex bg-[#F2F2F2] rounded-lg">
+          <LuSearch size={28} className="mx-2" />
+          <input
+            type="text"
+            placeholder="Search anything"
+            className="bg-[#F2F2F2] font-openSans text-lg text-[#828282]"
+          />
         </div>
-        <div className="w-full flex flex-col justify-center p-2 items-center hover:text-black">
-          <AiOutlineHeart />
-          <span className="text-sm font-openSans text-gray-500">Saved</span>
-        </div>
-        <div className="w-full flex flex-col justify-center p-2 items-center hover:text-black">
-          <HiOutlineShoppingBag />
-          <span className="text-sm font-openSans text-gray-500">Cart</span>
-        </div>
-        <div className="w-full flex flex-col justify-center p-2 items-center hover:text-black">
-          <LuSettings />
-          <span className="text-sm text-gray-500">Settings</span>
+        <div className="p-3  rounded-lg bg-black text-white">
+          <BiFilter size={36} className="font-bold" />
         </div>
       </div>
+      <div className="flex mx-4  border mt-3 items-center gap-3 justify-between">
+        <div
+          className={`p-2 bg-[#f2f2f2] text-black w-3/5 rounded-lg text-center text-lg font-openSans font-medium ${
+            active[0] === 1 ? "bg-black text-white" : "bg-[#f2f2f2] text-black"
+          } `}
+          onClick={(e) => handleClick(e)}
+        >
+          All
+        </div>
+        <div
+          className={`p-2 bg-[#f2f2f2] text-black w-3/5 rounded-lg text-center text-lg font-openSans font-medium ${
+            active[1] === 1 ? "bg-black text-white" : "bg-[#f2f2f2] text-black"
+          } `}
+          onClick={(e) => handleClick(e)}
+        >
+          Men
+        </div>
+        <div
+          className={`p-2 bg-[#f2f2f2] text-black w-3/5 rounded-lg text-center text-lg font-openSans font-medium ${
+            active[2] === 1 ? "bg-black text-white" : "bg-[#f2f2f2] text-black"
+          } `}
+          onClick={(e) => handleClick(e)}
+        >
+          Women
+        </div>
+        <div
+          className={`p-2 bg-[#f2f2f2] text-black w-3/5 rounded-lg text-center text-lg font-openSans font-medium ${
+            active[3] === 1 ? "bg-black text-white" : "bg-[#f2f2f2] text-black"
+          } `}
+          onClick={(e) => handleClick(e)}
+        >
+          Kids
+        </div>
+      </div>
+      <div className="mx-4 mt-6 grid grid-cols-2 gap-4 overflow-y-auto pb-40">
+        {isLoading && Array(6).fill(0).map((item, index) => {
+          return <Loading key={index} />
+        })}
+        {!isLoading && allProducts.length === 0 && (
+          <div className="w-full text-center text-2xl font-bold">
+            No Products Found
+          </div>
+        )}
+        {!isLoading &&
+          allProducts.length > 0 &&
+          allProducts.map((item) => {
+            console.log(item);
+            return <ItemsCard key={item.id} data={item} />;
+          })}
+      </div>
+      <FooterHomePage />
     </div>
   );
 };

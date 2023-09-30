@@ -1,5 +1,5 @@
 import './globals.css'
-
+import {ContextProvider} from '../context/Context'
 
 export const metadata = {
   title: 'Create Next App',
@@ -9,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body >{children}</body>
+      <body>
+        <ContextProvider>{children}</ContextProvider>
+      </body>
     </html>
-  )
+  );
 }
