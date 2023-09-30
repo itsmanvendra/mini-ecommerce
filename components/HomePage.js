@@ -67,7 +67,7 @@ const HomePage = () => {
         <BsFill1CircleFill className="absolute top-5 right-4 rounded-full text-sm " />
       </div>
       <div className="flex mx-4   mt-2 items-center gap-2">
-        <div className="grow p-2 py-4 flex bg-[#F2F2F2] rounded-lg">
+        <div className="grow p-2 flex bg-[#F2F2F2] rounded-lg">
           <LuSearch size={28} className="mx-2" />
           <input
             type="text"
@@ -75,11 +75,11 @@ const HomePage = () => {
             className="bg-[#F2F2F2] font-openSans text-lg text-[#828282]"
           />
         </div>
-        <div className="p-3  rounded-lg bg-black text-white">
-          <BiFilter size={36} className="font-bold" />
+        <div className="p-1  rounded-lg bg-black text-white">
+          <BiFilter size={32} className="font-bold" />
         </div>
       </div>
-      <div className="flex mx-4  border mt-3 items-center gap-3 justify-between">
+      <div className="flex mx-4 mt-3 items-center gap-3 justify-between">
         <div
           className={`p-2 bg-[#f2f2f2] text-black w-3/5 rounded-lg text-center text-lg font-openSans font-medium ${
             active[0] === 1 ? "bg-black text-white" : "bg-[#f2f2f2] text-black"
