@@ -5,7 +5,7 @@ import { FiArrowLeft, FiBell } from "react-icons/fi";
 import { BsFill1CircleFill } from "react-icons/bs";
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 import FooterDetailsPage from "@/components/FooterDetailsPage";
-
+import Link from "next/link";
 const ProductDetailPage = () => {
   const [size, setSize] = useState("S");
   const [active, setActive] = useState([1, 0, 0]);
@@ -37,7 +37,9 @@ const ProductDetailPage = () => {
   return (
     <div className="relative min-h-screen pt-8">
       <div className="flex mx-4 p-4 pl-0 items-center relative">
-        <FiArrowLeft className="text-2xl font-semibold" />
+        <Link href="/">
+          <FiArrowLeft className="text-2xl font-semibold" />
+        </Link>
         <h1 className="grow text-2xl font-semibold font-sans text-center">
           Details
         </h1>

@@ -61,14 +61,14 @@ const HomePage = () => {
 
   return (
     <div className="relative min-h-screen pt-8">
-      <div className="flex mx-4  p-4 pl-0 items-center relative">
+      <div className="flex mx-4  py-4 items-center relative">
         <h1 className="grow text-4xl font-semibold font-sans">Discover</h1>
         <FiBell className="text-2xl font-extrabold" />
-        <BsFill1CircleFill className="absolute top-5 right-4 rounded-full text-sm " />
+        <BsFill1CircleFill className="absolute top-5 right-0 rounded-full text-sm " />
       </div>
-      <div className="flex mx-4   mt-2 items-center gap-2">
-        <div className="grow p-2 flex bg-[#F2F2F2] rounded-lg">
-          <LuSearch size={28} className="mx-2" />
+      <div className="flex mx-2   mt-2 items-center gap-2">
+        <div className="grow px-1 py-2 flex bg-[#F2F2F2] rounded-lg">
+          <LuSearch size={28} className="" />
           <input
             type="text"
             placeholder="Search anything"

@@ -6,7 +6,7 @@ const ItemsCard = ({ data }) => {
   const [fav, setFav] = useState(false);
     return (
       <div className="flex flex-col gap-2" onClick={() => productRef.current.click()}>
-        <div className="bg-[#0000000D] h-48 rounded-xl relative">
+        <div className="bg-[#0000000D] h-48 rounded-xl relative border">
           <img
             src={data.thumbnail}
             alt=""
