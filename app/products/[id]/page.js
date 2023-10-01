@@ -14,7 +14,7 @@ const ProductDetailPage = () => {
 
   
   const [size, setSize] = useState("S");
-  const [active, setActive] = useState([1, 0, 0]);
+  const [active, setActive] = useState([0, 0, 0]);
   
     const pathname = usePathname();
   const id = pathname.split("/")[2];
@@ -41,8 +41,8 @@ const ProductDetailPage = () => {
     }, []);
 
   return (
-    <div className="relative min-h-screen pt-8">
-      <div className="flex mx-4 p-4 pl-0 items-center relative">
+    <div className="relative min-h-screen pt-4">
+      <div className="flex mx-4 py-4 pl-0 items-center relative">
         <Link href="/">
           <FiArrowLeft className="text-2xl font-semibold" />
         </Link>
@@ -50,7 +50,7 @@ const ProductDetailPage = () => {
           Details
         </h1>
         <FiBell className="text-2xl font-extrabold" />
-        <BsFill1CircleFill className="absolute top-4 right-4 rounded-full text-sm " />
+        <BsFill1CircleFill className="absolute top-4 right-0 rounded-full text-sm " />
       </div>
       <div className="mt-4 mx-4 overflow-y-auto pb-40">
         <div className="rounded-xl h-96 border-2 bg-cover bg-center relative">
@@ -93,30 +93,30 @@ const ProductDetailPage = () => {
         <div className="my-4 px-2 text-[#9C9C9C] text-xl font-openSans ">
           {product.description}
         </div>
-        <div className=" my-2 px-2">
-          <div className="py-2 text-black text-2xl font-openSans">
+        <div className=" mt-2 px-2">
+          <div className="py-2 text-black text-xl font-openSans">
             Choose Size
           </div>
-          <div className="flex my-2 gap-4">
+          <div className="flex my-1 gap-4">
             <div
-              className={`p-2 px-4 border border-black rounded-lg text-2xl font-medium ${
-                active[0] === 1 ? "bg-blue-600 text-white" : ""
+              className={`p-2 px-4 border border-[#9c9c9c] rounded-lg text-xl font-openSans ${
+                active[0] === 1 ? "bg-blue-500 text-white" : ""
               }`}
               onClick={handleSizeChange}
             >
               S
             </div>
             <div
-              className={`p-2 px-4 border border-black rounded-lg text-2xl font-medium ${
-                active[1] === 1 ? "bg-blue-600 text-white" : ""
+              className={`p-2 px-4 border border-[#9c9c9c] rounded-lg text-xl font-openSans ${
+                active[1] === 1 ? "bg-blue-500 text-white" : ""
               }`}
               onClick={handleSizeChange}
             >
               M
             </div>
             <div
-              className={`p-2 px-4 border border-black rounded-lg text-2xl font-medium ${
-                active[2] === 1 ? "bg-blue-600 text-white" : ""
+              className={`p-2 px-4 border border-[#9c9c9c] rounded-lg text-xl font-openSans  ${
+                active[2] === 1 ? "bg-blue-500 text-white" : ""
               }`}
               onClick={handleSizeChange}
             >
