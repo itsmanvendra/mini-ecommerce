@@ -25,7 +25,7 @@ const Favourites = () => {
             return <ItemsCard key={item.id} data={item} isFavPage={true} />;
           })}
       </div>
-      <div className="text-center text-2xl font-bold">No Favourites :(</div>
+      {favList.length === 0 && <div className="text-center text-2xl font-bold">No Favourites :(</div>}
       <FooterHomePage />
     </div>
   );
