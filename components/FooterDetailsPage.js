@@ -19,7 +19,7 @@ const FooterDetailsPage = ({ product, size }) => {
     <div className=" bottom-0 p-4 bg-white w-full flex text-gray-600 justify-between text-2xl items-center border-t border-[#00000033] fixed">
       <div className="flex flex-col p-2   ">
         <p className="text-base font-semibold  text-[#9c9c9c]">Price</p>
-        <h1 className="text-2xl text-black font-medium font-openSans">
+        <h1 className="text-lg text-black font-medium font-openSans">
           INR {product?.price}
         </h1>
       </div>

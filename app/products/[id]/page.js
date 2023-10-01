@@ -3,16 +3,24 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiArrowLeft, FiBell } from "react-icons/fi";
 import { BsFill1CircleFill } from "react-icons/bs";
-import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
+import { AiOutlineHeart, AiFillStar, AiFillHeart } from "react-icons/ai";
 import FooterDetailsPage from "@/components/FooterDetailsPage";
 import Link from "next/link";
+import { useGlobalContext } from "@/context/Context";
+
+
 const ProductDetailPage = () => {
+  const { addToFavList, removeFromFavList, favList } = useGlobalContext();
+
+  
   const [size, setSize] = useState("S");
   const [active, setActive] = useState([1, 0, 0]);
   
     const pathname = usePathname();
-    const id = pathname.split("/")[2];
+  const id = pathname.split("/")[2];
+  const isPresent = favList.find((item) => item.id === id);
   const [product, setProduct] = useState({});
+  const [fav, setFav] = useState(isPresent);
   
   const handleSizeChange = (e) => {
     setSize(e.target.innerText);
@@ -24,13 +32,11 @@ const ProductDetailPage = () => {
         try {
           let res = await fetch(url);
           res = await res.json();
-          console.log(res);
           setProduct(res);
         } catch (err) {
           console.log(err);
         }
         }
-        console.log(id);
       fetchData(`https://dummyjson.com/products/${id}`);
     }, []);
 
@@ -52,8 +58,23 @@ const ProductDetailPage = () => {
             src={product?.images?.[0]}
             className="w-full h-full rounded-xl"
           />
-          <div className="absolute top-4 right-4 p-2 bg-[#f2f2f2] rounded-lg drop-shadow-lg">
-            <AiOutlineHeart className="text-2xl text-black font-bold" />
+          <div
+            className="absolute top-4 right-4 p-2 bg-[#f2f2f2] rounded-lg drop-shadow-lg"
+            onClick={(e) => {
+              if (!fav) {
+                addToFavList(product);
+              } else {
+                removeFromFavList(product.id);
+              }
+              setFav((prev) => !prev);
+              e.stopPropagation();
+            }}
+          >
+            {fav ? (
+              <AiFillHeart className="text-2xl font-bold text-red-700" />
+            ) : (
+              <AiOutlineHeart className="text-2xl  font-bolder text-black" />
+            )}
           </div>
         </div>
         <div className="mt-2 px-2 py-2 text-3xl font-semibold">

@@ -10,7 +10,6 @@ import CartItems from "@/components/CartItems";
 
 const Checkout = () => {
   const { cart } = useGlobalContext();
-  console.log(cart);
   const calculateSubtotal = cart.reduce((acc, item) => {
     return acc + item.price * item.quantity;
   }, 0);
@@ -29,7 +28,7 @@ const Checkout = () => {
         <FiBell className="text-2xl font-extrabold" />
         <BsFill1CircleFill className="absolute top-4 right-4 rounded-full text-sm " />
       </div>
-      <div className="mt-4 mx-4 overflow-y-auto">
+      <div className="mt-0 mx-4 overflow-y-auto">
         {cart.length > 0 ? (
           cart.map((item) => {
             return <CartItems key={item.id} item={item} />;
@@ -49,19 +48,19 @@ const Checkout = () => {
         />
       </div>
       <div className="my-4 mx-4">
-        <div className="flex p-4">
+        <div className="flex px-4 pt-2 py-1">
           <p className="grow text-base text-[#979797] font-medium font-openSans">
             Sub-total
           </p>
           <p className="text-lg font-semibold">INR {calculateSubtotal}</p>
         </div>
-        <div className="flex px-4 py-2">
+        <div className="flex px-4 pt-2 py-1">
           <p className="grow text-base text-[#979797] font-medium font-openSans">
             Vat (%)
           </p>
           <p className="text-lg font-semibold">INR 0.00</p>
         </div>
-        <div className="flex px-4 py-2">
+        <div className="flex px-4 pt-2 py-1">
           <p className="grow text-base text-[#979797] font-medium font-openSans">
             Shipping Fee
           </p>

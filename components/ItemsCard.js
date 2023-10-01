@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-const ItemsCard = ({ data }) => {
+import { useGlobalContext } from "@/context/Context";
+
+const ItemsCard = ({ data, isFavPage }) => {
+  const { addToFavList, removeFromFavList, favList } = useGlobalContext();
+  const isPresent = favList.find((item) => item.id === data.id);
   const productRef = useRef(null);
-  const [fav, setFav] = useState(false);
+  const [fav, setFav] = useState(isFavPage || isPresent);
     return (
-      <div className="flex flex-col gap-2" onClick={() => productRef.current.click()}>
+      <div className="flex flex-col gap-2 relative z-10" onClick={() => productRef.current.click()} >
         <div className="bg-[#0000000D] h-48 rounded-xl relative border">
           <img
             src={data.thumbnail}
@@ -13,8 +17,12 @@ const ItemsCard = ({ data }) => {
             className="h-full w-full object-cover rounded-xl"
           />
           <div className="absolute top-2 right-2 p-2 bg-[#f2f2f2] rounded-lg drop-shadow-lg" onClick={(e) => {
+            if (!fav) {
+              addToFavList(data)
+            } else {
+              removeFromFavList(data.id)
+            }
             setFav((prev) => !prev)
-            console.log('clicked')
             e.stopPropagation();
           }
           }>

@@ -23,26 +23,41 @@ const CartItems = ({ item }) => {
           className="h-full w-full object-cover rounded-xl"
         />
       </div>
-      <div className="w-2/3 h-32 relative">
-        <div className="text-xl font-openSans font-medium">
-          {item.title}
-        </div>
-              <div className="text-sm font-openSans text-gray-500">Size {item.size}</div>
-        <div className="absolute bottom-0 left-0 text-lg font-semibold">
-          INR {item.price}
-        </div>
-        <div className="absolute top-2 right-3 text-red-500 text-lg" onClick={handleDelete}>
-          <BsFillTrash3Fill />
-        </div>
-        <div className="flex absolute right-2 bottom-0 gap-2">
-          <div className="p-1 rounded-md border border-red-500 font-bold " onClick={handleSubElement}>
-            <AiOutlineMinus />
+      <div className="w-2/3 h-32 flex flex-col">
+        <div className="flex px-1 gap-1 grow">
+          <div className="grow">
+            <div className="text-lg  font-medium">
+              {item.title}
+            </div>
+            <div className="text-sm font-openSans text-gray-500">
+              Size {item.size}
+            </div>
           </div>
-          <div className=" p-1 rounded-lg text-sm  font-openSans font-semibold ">
-            {item.quantity}
+          <div
+            className=" text-red-500 text-lg box-border py-2 mr-2"
+            onClick={handleDelete}
+          >
+            <BsFillTrash3Fill />
           </div>
-          <div className="p-1 rounded-lg border border-red-500 font-bold" onClick={handleAddElement}>
-            <AiOutlinePlus />
+        </div>
+        <div className="flex gap-2 mr-1">
+          <div className="text-base font-semibold grow">INR {item.price}</div>
+          <div className="flex gap-1">
+            <div
+              className="p-1 rounded-md border border-red-500 font-bold "
+              onClick={handleSubElement}
+            >
+              <AiOutlineMinus />
+            </div>
+            <div className=" p-1 rounded-lg text-sm  font-openSans font-semibold ">
+              {item.quantity}
+            </div>
+            <div
+              className="p-1 rounded-lg border border-red-500 font-bold"
+              onClick={handleAddElement}
+            >
+              <AiOutlinePlus />
+            </div>
           </div>
         </div>
       </div>
